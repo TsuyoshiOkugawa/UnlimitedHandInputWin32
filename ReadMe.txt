@@ -20,7 +20,7 @@ unlimitedHand->initialize("COM7");
 // 更新/取得
 while (mainloop) {
 	unlimitedHand->update();
-	printf("X%dY%dZ%d\n", unlimitedHand_g->getAngleX(), unlimitedHand_g->getAngleY(), unlimitedHand_g->getAngleZ());
+	printf("X%dY%dZ%d\n", unlimitedHand->getAngleX(), unlimitedHand->getAngleY(), unlimitedHand->getAngleZ());
 }
 
 
