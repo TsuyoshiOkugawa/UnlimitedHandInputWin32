@@ -164,9 +164,6 @@ void UHInput::parseLine(const char* line) {
 }
 
 void UHInput::executeCommandBuffer() {
-	if (currentCommandBBufferPosition_ > 0) {
-		PurgeComm(uhHandle_, PURGE_RXABORT | PURGE_RXCLEAR);
-	}
 	for (uint32_t i = 0; i < currentCommandBBufferPosition_; ++i) {
 		send(&commandBuffer_[i].cmd, sizeof(uint8_t));
 	}

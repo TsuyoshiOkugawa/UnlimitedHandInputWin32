@@ -28,19 +28,30 @@ public:
 	
 
 	// accel and gyro.
-	inline int getAngleX() const {
+	inline int32_t getAngleX() const {
 		return accelAndGyro_[0];
 	}
-	inline int getAngleY() const {
+	inline int32_t getAngleY() const {
 		return accelAndGyro_[1];
 	}
-	inline int getAngleZ() const {
+	inline int32_t getAngleZ() const {
 		return accelAndGyro_[2];
 	}
 
 	// Photo-reflectors.
-	inline int getPhotoReactor(uint32_t index) const {
-		int retValue = 0;
+	enum class PhotoReactor_Type {
+		FingerMotion0 = 0,
+		FingerMotion1,
+		FingerMotion2,
+		FingerMotion3,
+		RadialAndUlnarDeviation0,
+		RadialAndUlnarDeviation1,
+		OpenHandAndWristMotion0,
+		OpenHandAndWristMotion1,
+	};
+	inline int32_t getPhotoReactor(PhotoReactor_Type type) const {
+		int32_t retValue = 0;
+		uint32_t index = static_cast<uint32_t>(type);
 		if (index < 8) {
 			retValue = photoReflectors_[index];
 		}
@@ -65,9 +76,9 @@ private:
 	bool ready_ = false;
 	HANDLE uhHandle_ = INVALID_HANDLE_VALUE;
 	HANDLE uhHandleR_ = INVALID_HANDLE_VALUE;
-	int acceleration_[3] = {0, 0, 0};
-	int gyro_[3] = {0, 0, 0};
-	int temprature_ = 0;
+	int32_t acceleration_[3] = {0, 0, 0};
+	int32_t gyro_[3] = {0, 0, 0};
+	int32_t temprature_ = 0;
 	static const uint32_t commandBufferCount_s = 256;
 	struct Command {
 		uint8_t cmd;
@@ -79,7 +90,7 @@ private:
 	OVERLAPPED readOverLaped_ = {};
 	OVERLAPPED writeOverLaped_ = {};
 
-	int accelAndGyro_[3] = {};
-	int photoReflectors_[8] ={};
+	int32_t accelAndGyro_[3] = {};
+	int32_t photoReflectors_[8] ={};
 
 };
