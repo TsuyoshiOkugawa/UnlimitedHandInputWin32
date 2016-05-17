@@ -101,11 +101,11 @@ void UHInput::readParams() {
 		char* text = new char[comstat.cbInQue + 1];
 		memset(text, 0, comstat.cbInQue);
 		DWORD readSize = 0;
-		if (FALSE == ReadFile(uhHandle_, text, comstat.cbInQue, &readSize, &readOverLaped)) {
+		if (FALSE == ReadFile(uhHandle_, text, comstat.cbInQue, &readSize, &readOverLaped_)) {
 			BOOL readErr = GetLastError();
 			if (readErr == ERROR_IO_PENDING) {
 				DWORD written = 0;
-				GetOverlappedResult(uhHandle_, &readOverLaped, &written, TRUE);
+				GetOverlappedResult(uhHandle_, &readOverLaped_, &written, TRUE);
 			} else {
 				UHINPUT_DEBUG_PRINTF("read failed\n");
 			}
@@ -187,11 +187,11 @@ bool UHInput::send(const void* data, size_t size) {
 	bool ret = true;
 	if (initialized_ && ready_) {
 		DWORD sendSize = 0;
-		if (FALSE == WriteFile(uhHandle_, data, static_cast<DWORD>(size), &sendSize, &writeOverLaped)) {
+		if (FALSE == WriteFile(uhHandle_, data, static_cast<DWORD>(size), &sendSize, &writeOverLaped_)) {
 			BOOL err = GetLastError();
 			if (err == ERROR_IO_PENDING) {
 				DWORD written = 0;
-				GetOverlappedResult(uhHandle_, &writeOverLaped, &written, TRUE);
+				GetOverlappedResult(uhHandle_, &writeOverLaped_, &written, TRUE);
 			} else {
 				printf("write failed[%s]\n", reinterpret_cast<const char*>(data));
 				ret = false;

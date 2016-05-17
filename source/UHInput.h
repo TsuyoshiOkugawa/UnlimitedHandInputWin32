@@ -76,8 +76,8 @@ private:
 	uint32_t currentCommandBBufferPosition_ = 0;
 	char tempTextBuffer_[256] = "";
 	uintptr_t thread_ = 0;
-	OVERLAPPED readOverLaped = {};
-	OVERLAPPED writeOverLaped = {};
+	OVERLAPPED readOverLaped_ = {};
+	OVERLAPPED writeOverLaped_ = {};
 
 	int accelAndGyro_[3] = {};
 	int photoReflectors_[8] ={};
