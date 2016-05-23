@@ -190,7 +190,7 @@ bool UHInput::send(const void* data, size_t size) {
 				DWORD written = 0;
 				GetOverlappedResult(uhHandle_, &writeOverLaped_, &written, TRUE);
 			} else {
-				printf("write failed[%s]\n", reinterpret_cast<const char*>(data));
+				UHINPUT_DEBUG_PRINTF("write failed[%s]\n", reinterpret_cast<const char*>(data));
 				ret = false;
 			}
 		}
